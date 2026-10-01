@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Rafaela - Upside Down Edition 👾🍕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Reset e Variáveis ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --vermelho: #E71D36;
+            --vermelho-escuro: #8B0000;
+            --vermelho-neon: #FF003C;
+            --amarelo: #FFB400;
+            --amarelo-neon: #FFD166;
+            --fundo: #050507;
+            --fundo-2: #0D0D12;
+            --fundo-3: #14141A;
+            --cinza: #2A2A36;
+            --texto: #E8E8F0;
+            --texto-claro: #8888A0;
+            --branco: #FFFFFF;
+            --verde-whats: #25D366;
+            --azul-portal: #4A00E0;
+            --transition: all 0.3s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--texto);
+            background: var(--fundo);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 0, 60, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 60, 0.04) 1px, transparent 1px);
+            background-size: 45px 45px;
+            pointer-events: none;
+            z-index: 0;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 45px 45px, 45px 45px; }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 60, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(74, 0, 224, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ===== Botões ===== */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            border: 2px solid;
+            transition: var(--transition);
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: transparent;
+        }
+
+        .btn-primary {
+            background: var(--vermelho);
+            color: var(--branco);
+            border-color: var(--vermelho-neon);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.6);
+        }
+
+        .btn-primary:hover {
+            background: var(--vermelho-neon);
+            box-shadow: 0 0 40px rgba(255, 0, 60, 1);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            color: var(--amarelo-neon);
+            border-color: var(--amarelo-neon);
+            box-shadow: 0 0 15px rgba(255, 209, 102, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: var(--amarelo-neon);
+            color: var(--fundo);
+            box-shadow: 0 0 40px rgba(255, 209, 102, 0.9);
+            transform: translateY(-3px);
+        }
+
+        /* ===== Header ===== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 5, 7, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--vermelho-neon);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.5);
+            padding: 14px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+            letter-spacing: 4px;
+        }
+
+        .logo-icon {
+            font-size: 34px;
+            filter: drop-shadow(0 0 12px var(--vermelho-neon));
+            display: inline-block;
+            transition: transform 1s ease;
+        }
+
+        .logo-icon.flip {
+            transform: rotate(180deg);
+        }
+
+        .logo-text {
+            color: var(--vermelho-neon);
+            text-shadow: 0 0 12px rgba(255, 0, 60, 0.9), 0 0 30px rgba(255, 0, 60, 0.6);
+        }
+
+        .logo-text span {
+            color: var(--amarelo-neon);
+            text-shadow: 0 0 12px rgba(255, 209, 102, 0.8);
+        }
+
+        .nav ul { display: flex; gap: 28px; }
+
+        .nav a {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--texto);
+            font-size: 17px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--vermelho-neon);
+            box-shadow: 0 0 10px var(--vermelho-neon);
+            transition: var(--transition);
+        }
+
+        .nav a:hover { color: var(--vermelho-neon); text-shadow: 0 0 10px var(--vermelho-neon); }
+        .nav a:hover::after { width: 100%; }
+
+        .header-actions { display: flex; gap: 12px; align-items: center; }
+
+        .icon-btn {
+            background: var(--fundo-3);
+            border: 2px solid var(--vermelho-neon);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            color: var(--texto);
+            box-shadow: 0 0 12px rgba(255, 0, 60, 0.3);
+        }
+
+        .icon-btn:hover {
+            background: var(--vermelho-neon);
+            box-shadow: 0 0 30px var(--vermelho-neon);
+            transform: scale(1.08);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--amarelo-neon);
+            color: var(--fundo);
+            font-size: 11px;
+            font-weight: 800;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--fundo);
+        }
+
+        .cart-count.pulse { animation: cart-pulse 0.4s ease; }
+
+        @keyframes cart-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.6); background: var(--branco); }
+            100% { transform: scale(1); }
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(255, 0, 60, 0.2) 0%, rgba(74, 0, 224, 0.15) 30%, transparent 65%);
+            transform: translate(-50%, -50%);
+            animation: portal-pulse 5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes portal-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 0, 60, 0.1);
+            border: 1px solid var(--vermelho-neon);
+            color: var(--vermelho-neon);
+            padding: 8px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+            animation: flicker 3s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            90% { opacity: 1; }
+            91% { opacity: 0.3; }
+            92% { opacity: 1; }
+            95% { opacity: 0.5; }
+            96% { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 76px;
+            line-height: 1;
+            letter-spacing: 4px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            color: var(--branco);
+            text-shadow: 0 0 10px rgba(255, 0, 60, 0.9), 0 0 30px rgba(255, 0, 60, 0.6), 4px 4px 0 rgba(0, 0, 0, 0.9);
+        }
+
+        .hero h1 span {
+            color: var(--vermelho-neon);
+            text-shadow: 0 0 15px rgba(255, 0, 60, 1), 0 0 40px rgba(255, 0, 60, 0.8), 4px 4px 0 rgba(0, 0, 0, 0.9);
+        }
+
+        .hero h1 .upside {
+            display: inline-block;
+            transform: rotate(180deg);
+            color: var(--azul-portal);
+            text-shadow: 0 0 15px rgba(74, 0, 224, 1), 0 0 40px rgba(74, 0, 224, 0.8), 4px 4px 0 rgba(0, 0, 0, 0.9);
+            animation: upside-flip 6s ease-in-out infinite;
+        }
+
+        @keyframes upside-flip {
+            0%, 80%, 100% { transform: rotate(180deg); }
+            40% { transform: rotate(0deg); }
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--texto-claro);
+            margin-bottom: 32px;
+            max-width: 520px;
+        }
+
+        .hero-buttons { display: flex; gap: 16px; margin-bottom: 48px; flex-wrap: wrap; }
+
+        .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+        .hero-stats div { display: flex; flex-direction: column; }
+
+        .hero-stats strong {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--vermelho-neon);
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--vermelho-neon);
+            line-height: 1;
+        }
+
+        .hero-stats span {
+            font-size: 12px;
+            color: var(--texto-claro);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 450px;
+        }
+
+        .hero-circle {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(255, 0, 60, 0.5) 0%, rgba(74, 0, 224, 0.3) 40%, transparent 70%);
+            border-radius: 50%;
+            animation: float 5s ease-in-out infinite;
+            box-shadow: 0 0 80px rgba(255, 0, 60, 0.6), inset 0 0 80px rgba(74, 0, 224, 0.4);
+        }
+
+        .hero-circle::before,
+        .hero-circle::after {
+            content: '';
+            position: absolute;
+            border: 2px solid var(--vermelho-neon);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .hero-circle::before { inset: 25px; animation: portal-ring 3s ease-in-out infinite; }
+        .hero-circle::after { inset: 55px; border-color: var(--azul-portal); animation: portal-ring 3s ease-in-out infinite 1.5s; }
+
+        @keyframes portal-ring {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 0.15; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero-emoji {
+            font-size: 210px;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 40px var(--vermelho-neon)) drop-shadow(0 0 80px rgba(255, 0, 60, 0.6));
+            animation: hero-glitch 4s infinite;
+        }
+
+        @keyframes hero-glitch {
+            0%, 100% { transform: translate(0) rotate(0); }
+            20% { transform: translate(-3px, 2px) rotate(-2deg); }
+            40% { transform: translate(3px, -2px) rotate(2deg); }
+            60% { transform: translate(-2px, 0) rotate(-1deg); }
+            80% { transform: translate(0) rotate(0); }
+        }
+
+        /* ===== Section Header ===== */
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 56px; }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--amarelo-neon);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 17px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-shadow: 0 0 12px rgba(255, 209, 102, 0.6);
+        }
+
+        .section-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 58px;
+            font-weight: 400;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: var(--branco);
+            text-shadow: 0 0 15px rgba(255, 0, 60, 0.8), 0 0 30px rgba(255, 0, 60, 0.5);
+        }
+
+        .section-header p { color: var(--texto-claro); font-size: 15px; }
+
+        /* ===== Diferenciais ===== */
+        .services { padding: 80px 0; background: var(--fundo-2); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--fundo-3);
+            padding: 32px 24px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--cinza);
+            border-top: 3px solid var(--vermelho-neon);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--vermelho-neon);
+            box-shadow: 0 0 40px rgba(255, 0, 60, 0.4);
+        }
+
+        .service-icon { font-size: 52px; margin-bottom: 16px; display: inline-block; filter: drop-shadow(0 0 12px var(--vermelho-neon)); }
+
+        .service-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--amarelo-neon);
+        }
+
+        .service-card p { color: var(--texto-claro); font-size: 13px; }
+
+        /* ===== Cardápio ===== */
+        .products { padding: 80px 0; background: var(--fundo); }
+
+        .filter-bar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+
+        .filter-btn {
+            padding: 10px 22px;
+            border: 2px solid var(--cinza);
+            background: var(--fundo-2);
+            color: var(--texto-claro);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 15px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--vermelho-neon);
+            color: var(--vermelho-neon);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+        }
+
+        .filter-btn.active {
+            background: var(--vermelho-neon);
+            color: var(--branco);
+            border-color: var(--vermelho-neon);
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.8);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background: var(--fundo-2);
+            border: 1px solid var(--cinza);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card.hidden { display: none; }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--vermelho-neon);
+            box-shadow: 0 15px 40px rgba(255, 0, 60, 0.4);
+        }
+
+        .product-image {
+            background: linear-gradient(135deg, var(--fundo-3), var(--fundo-2));
+            height: 170px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            border-bottom: 1px solid var(--cinza);
+            overflow: hidden;
+        }
+
+        .product-image span:first-child {
+            filter: drop-shadow(0 0 15px rgba(255, 0, 60, 0.5));
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-card:hover .product-image span:first-child {
+            transform: rotate(180deg) scale(1.1);
+            filter: drop-shadow(0 0 25px var(--azul-portal));
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--vermelho-neon);
+            color: var(--branco);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            padding: 5px 12px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.6);
+            z-index: 3;
+        }
+
+        .product-tag.promo { background: var(--amarelo-neon); color: var(--fundo); }
+        .product-tag.novo { background: var(--azul-portal); }
+        .product-tag.top { background: #00C853; }
+
+        .product-info { padding: 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+        .product-category {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            color: var(--amarelo-neon);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .product-info h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--texto);
+            min-height: 42px;
+            line-height: 1.4;
+        }
+
+        .product-info .desc {
+            font-size: 12px;
+            color: var(--texto-claro);
+            min-height: 54px;
+            line-height: 1.5;
+        }
+
+        .product-rating { font-size: 11px; color: var(--amarelo-neon); }
+
+        .product-price { display: flex; flex-direction: column; margin: 6px 0 10px; }
+
+        .old-price { font-size: 12px; color: var(--texto-claro); text-decoration: line-through; }
+
+        .new-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+            letter-spacing: 2px;
+            color: var(--vermelho-neon);
+            text-shadow: 0 0 15px rgba(255, 0, 60, 0.8);
+            line-height: 1;
+        }
+
+        .btn-add {
+            margin-top: auto;
+            padding: 12px;
+            border: 2px solid var(--vermelho-neon);
+            background: transparent;
+            color: var(--vermelho-neon);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-add:hover {
+            background: var(--vermelho-neon);
+            color: var(--branco);
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.8);
+        }
+
+        .btn-add:active { transform: scale(0.97); }
+
+        /* ===== Sobre ===== */
+        .about { padding: 80px 0; background: var(--fundo-2); }
+        .about-content { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--vermelho-escuro), var(--azul-portal));
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 170px;
+            box-shadow: 0 0 60px rgba(255, 0, 60, 0.6), inset 0 0 60px rgba(74, 0, 224, 0.4);
+            position: relative;
+            border: 2px solid var(--vermelho-neon);
+        }
+
+        .about-text h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin: 12px 0 20px;
+            color: var(--branco);
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.7);
+        }
+
+        .about-text p { color: var(--texto-claro); margin-bottom: 24px; font-size: 15px; }
+
+        .about-list { margin-bottom: 32px; }
+
+        .about-list li {
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--texto);
+            border-bottom: 1px dashed var(--cinza);
+        }
+
+        /* ===== Features ===== */
+        .features {
+            background: linear-gradient(90deg, var(--vermelho-escuro), var(--vermelho), var(--azul-portal));
+            background-size: 200% 100%;
+            animation: gradient-move 10s linear infinite;
+            padding: 50px 0;
+            border-top: 2px solid var(--vermelho-neon);
+            border-bottom: 2px solid var(--vermelho-neon);
+        }
+
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+
+        .feature { text-align: center; color: var(--branco); }
+        .feature-icon { font-size: 44px; display: block; margin-bottom: 12px; }
+
+        .feature h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .feature p { font-size: 13px; font-weight: 500; }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: var(--fundo);
+            color: var(--texto-claro);
+            padding: 60px 0 0;
+            border-top: 2px solid var(--vermelho-neon);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.3);
+            position: relative;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer .logo-text { color: var(--vermelho-neon); }
+        .footer-desc { margin: 16px 0 20px; font-size: 13px; line-height: 1.7; }
+
+        .social { display: flex; gap: 12px; }
+
+        .social a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--fundo-3);
+            border: 2px solid var(--cinza);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .social a:hover {
+            background: var(--vermelho-neon);
+            border-color: var(--vermelho-neon);
+            transform: translateY(-3px) rotate(-8deg);
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.8);
+        }
+
+        .footer h4 {
+            color: var(--amarelo-neon);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .footer ul li { margin-bottom: 10px; font-size: 13px; }
+        .footer ul a { transition: var(--transition); }
+        .footer ul a:hover { color: var(--vermelho-neon); padding-left: 6px; }
+
+        .contact-info li { display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+
+        .footer-bottom {
+            border-top: 1px solid var(--cinza);
+            padding: 22px 0;
+            text-align: center;
+            font-size: 13px;
+            color: var(--texto-claro);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Modal do Carrinho ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: flex-end;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .cart-panel {
+            background: var(--fundo-2);
+            border-left: 2px solid var(--vermelho-neon);
+            width: 100%;
+            max-width: 480px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.3s ease;
+            box-shadow: -10px 0 60px rgba(255, 0, 60, 0.6);
+        }
+
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        .cart-header {
+            padding: 24px;
+            background: linear-gradient(90deg, var(--vermelho-escuro), var(--vermelho-neon), var(--azul-portal));
+            background-size: 200% 100%;
+            animation: gradient-move 5s linear infinite;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--vermelho-neon);
+        }
+
+        .cart-header h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--branco);
+        }
+
+        .cart-close {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--branco);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-close:hover {
+            background: rgba(0, 0, 0, 0.6);
+            transform: rotate(90deg);
+            border-color: var(--branco);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: var(--texto-claro);
+            padding: 60px 20px;
+            font-size: 14px;
+        }
+
+        .cart-empty span {
+            font-size: 70px;
+            display: block;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 20px var(--vermelho-neon));
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: var(--fundo-3);
+            border: 1px solid var(--cinza);
+            border-left: 3px solid var(--vermelho-neon);
+            padding: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .cart-item-emoji {
+            font-size: 32px;
+            background: var(--fundo);
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid var(--cinza);
+        }
+
+        .cart-item-info { flex: 1; min-width: 0; }
+
+        .cart-item-info h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cart-item-info .item-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--vermelho-neon);
+            letter-spacing: 1.5px;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--fundo);
+            border-radius: 50px;
+            padding: 4px;
+            border: 1px solid var(--cinza);
+        }
+
+        .cart-item-qty button {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: none;
+            background: var(--vermelho-neon);
+            color: var(--branco);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            line-height: 1;
+            transition: var(--transition);
+        }
+
+        .cart-item-qty button:hover {
+            background: var(--vermelho);
+            box-shadow: 0 0 15px var(--vermelho-neon);
+        }
+
+        .cart-item-qty span {
+            min-width: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--texto);
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: var(--transition);
+            color: var(--texto);
+        }
+
+        .cart-item-remove:hover { opacity: 1; transform: scale(1.2); color: var(--vermelho-neon); }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 2px solid var(--vermelho-neon);
+            background: var(--fundo-2);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cart-field { display: flex; flex-direction: column; gap: 6px; }
+
+        .cart-field label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            color: var(--amarelo-neon);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .cart-field input,
+        .cart-field textarea,
+        .cart-field select {
+            padding: 10px 14px;
+            border: 1px solid var(--cinza);
+            background: var(--fundo-3);
+            color: var(--texto);
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+            resize: none;
+        }
+
+        .cart-field input:focus,
+        .cart-field textarea:focus,
+        .cart-field select:focus {
+            border-color: var(--vermelho-neon);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 8px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .cart-total strong {
+            font-size: 34px;
+            color: var(--vermelho-neon);
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.8);
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            background: linear-gradient(135deg, var(--verde-whats), #128C7E);
+            color: var(--branco);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(37, 211, 102, 0.9);
+        }
+
+        .btn-checkout:disabled {
+            background: #333;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            color: #666;
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--vermelho-neon);
+            color: var(--branco);
+            padding: 16px 28px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 0 40px rgba(255, 0, 60, 0.9);
+            transform: translateY(150px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 2000;
+            border: 2px solid var(--amarelo-neon);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* ===== WhatsApp Flutuante ===== */
+        .whats-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--verde-whats);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.7);
+            cursor: pointer;
+            z-index: 999;
+            transition: var(--transition);
+            color: var(--branco);
+            border: none;
+        }
+
+        .whats-float:hover {
+            transform: scale(1.15) rotate(15deg);
+            box-shadow: 0 0 50px rgba(37, 211, 102, 1);
+        }
+
+        /* ===== Responsivo ===== */
+        @media (max-width: 900px) {
+            .hero-content, .about-content { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-buttons, .hero-stats { justify-content: center; }
+            .hero h1 { font-size: 52px; }
+            .hero-circle { width: 320px; height: 320px; }
+            .hero-emoji { font-size: 160px; }
+            .nav ul { gap: 18px; }
+            .nav a { font-size: 15px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .about-image { height: 300px; font-size: 130px; }
+            .section-header h2 { font-size: 42px; }
+            .about-text h2 { font-size: 36px; }
+        }
+
+        @media (max-width: 640px) {
+            .nav { display: none; }
+            .hero h1 { font-size: 42px; letter-spacing: 2px; }
+            .hero-circle { width: 260px; height: 260px; }
+            .hero-emoji { font-size: 130px; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-buttons .btn { width: 100%; }
+            .hero-stats { gap: 20px; }
+            .filter-bar { gap: 8px; }
+            .filter-btn { padding: 8px 14px; font-size: 13px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social { justify-content: center; }
+            .contact-info li { justify-content: center; }
+            .cart-panel { max-width: 100%; }
+            .toast { bottom: 90px; right: 20px; left: 20px; justify-content: center; font-size: 15px; }
+            .whats-float { bottom: 20px; left: 20px; width: 54px; height: 54px; font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <span class="logo-icon" id="logoFlip">🍕</span>
+                <span class="logo-text">Pizzaria <span>Rafaela</span></span>
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#diferenciais">Diferenciais</a></li>
+                    <li><a href="#cardapio">Cardápio</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn cart-btn" aria-label="Carrinho" onclick="openCart()">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="badge">👾 Bem-vindo ao Upside Down</span>
+                <h1>
+                    O sabor do <span>mundo invertido</span><br>
+                    <span class="upside">🍕</span> chegou até você
+                </h1>
+                <p>Pizzas assustadoramente deliciosas, preparadas no lado sombrio da cidade. Peça agora antes que o portal se feche!</p>
+                <div class="hero-buttons">
+                    <a href="#cardapio" class="btn btn-primary">Ver Cardápio</a>
+                    <a href="#sobre" class="btn btn-outline">Nossa História</a>
+                </div>
+                <div class="hero-stats">
+                    <div><strong>+13.000</strong><span>Pedidos no portal</span></div>
+                    <div><strong>+40</strong><span>Sabores sombrios</span></div>
+                    <div><strong>30 min</strong><span>Entrega interdimensional</span></div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-circle"></div>
+                <span class="hero-emoji">🍕</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais -->
+    <section class="services" id="diferenciais">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossos Diferenciais</span>
+                <h2>Por que somos assustadoramente bons?</h2>
+                <p>Tradição, sabor e aquele toque do outro lado.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">👨‍🍳</div>
+                    <h3>Massa Artesanal</h3>
+                    <p>Massa preparada com fermentação natural de outro mundo.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧀</div>
+                    <h3>Ingredientes Frescos</h3>
+                    <p>Queijos nobres e ingredientes selecionados no Upside Down.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔥</div>
+                    <h3>Forno a Lenha</h3>
+                    <p>Assadas em forno de fogo interdimensional.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛵</div>
+                    <h3>Entrega Rápida</h3>
+                    <p>Sua pizza atravessa o portal em até 30 minutos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cardápio -->
+    <section class="products" id="cardapio">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nosso Cardápio</span>
+                <h2>Escolha sua pizza do outro lado</h2>
+                <p>Sabores tradicionais, especiais, premium e doces — todos aterrorizantemente deliciosos.</p>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="tradicionais">Tradicionais</button>
+                <button class="filter-btn" data-filter="especiais">Especiais</button>
+                <button class="filter-btn" data-filter="premium">Premium</button>
+                <button class="filter-btn" data-filter="doces">Doces</button>
+                <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+
+                <div class="product-card" data-category="tradicionais">
+                    <div class="product-image">
+                        <span>🍕</span>
+                        <span class="product-tag top">Top 1</span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Tradicional</span>
+                        <h3>Pizza Calabresa</h3>
+                        <p class="desc">Molho de tomate, mussarela, calabresa fatiada e cebola.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (245)</div>
+                        <div class="product-price">
+                            <span class="new-price">R$ 45,90</span>
+                        </div>
+                        <button class="btn-add" data-name="Pizza Calabresa" data-price="45.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tradicionais">
+                    <div class="product-image"><span>🍕</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Tradicional</span>
+                        <h3>Pizza Margherita</h3>
+                        <p class="desc">Molho, mussarela, tomate fresco, manjericão e orégano.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (189)</div>
+                        <div class="product-price"><span class="new-price">R$ 42,90</span></div>
+                        <button class="btn-add" data-name="Pizza Margherita" data-price="42.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tradicionais">
+                    <div class="product-image"><span>🍕</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Tradicional</span>
+                        <h3>Pizza Portuguesa</h3>
+                        <p class="desc">Presunto, ovos, cebola, azeitona, ervilha e mussarela.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (176)</div>
+                        <div class="product-price"><span class="new-price">R$ 49,90</span></div>
+                        <button class="btn-add" data-name="Pizza Portuguesa" data-price="49.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tradicionais">
+                    <div class="product-image"><span>🍕</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Tradicional</span>
+                        <h3>Pizza Quatro Queijos</h3>
+                        <p class="desc">Mussarela, provolone, parmesão e catupiry.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (210)</div>
+                        <div class="product-price"><span class="new-price">R$ 52,90</span></div>
+                        <button class="btn-add" data-name="Pizza Quatro Queijos" data-price="52.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="especiais">
+                    <div class="product-image">
+                        <span>🍕</span>
+                        <span class="product-tag novo">Novo</span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Especial</span>
+                        <h3>Pizza do Demogorgon</h3>
+                        <p class="desc">Calabresa apimentada, pimenta jalapeño, cheddar e bacon.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (89)</div>
+                        <div class="product-price"><span class="new-price">R$ 59,90</span></div>
+                        <button class="btn-add" data-name="Pizza do Demogorgon" data-price="59.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="especiais">
+                    <div class="product-image">
+                        <span>🍕</span>
+                        <span class="product-tag promo">-15%</span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Especial</span>
+                        <h3>Pizza Eleven</h3>
+                        <p class="desc">Frango grelhado, catupiry, milho e azeitonas.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (134)</div>
+                        <div class="product-price">
+                            <span class="old-price">R$ 62,00</span>
+                            <span class="new-price">R$ 52,70</span>
+                        </div>
+                        <button class="btn-add" data-name="Pizza Eleven" data-price="52.70" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="especiais">
+                    <div class="product-image"><span>🍕</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Especial</span>
+                        <h3>Pizza Vecna</h3>
+                        <p class="desc">Carne seca, queijo coalho, cebola caramelizada e rúcula.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (76)</div>
+                        <div class="product-price"><span class="new-price">R$ 64,90</span></div>
+                        <button class="btn-add" data-name="Pizza Vecna" data-price="64.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="especiais">
+                    <div class="product-image"><span>🍕</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Especial</span>
+                        <h3>Pizza Hawkins</h3>
+                        <p class="desc">Bacon, cheddar, cebola roxa e barbecue.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (145)</div>
+                        <div class="product-price"><span class="new-price">R$ 54,90</span></div>
+                        <button class="btn-add" data-name="Pizza Hawkins" data-price="54.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="especiais">
+                    <div class="product-image"><span>🍕</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Especial</span>
+                        <h3>Pizza Mind Flayer</h3>
+                        <p class="desc">Pepperoni duplo, cheddar, pimenta calabresa e orégano.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (112)</div>
+                        <div class="product-price"><span class="new-price">R$ 58,90</span></div>
+                        <button class="btn-add" data-name="Pizza Mind Flayer" data-price="58.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="premium">
+                    <div class="product-image">
+                        <span>🍕</span>
+                        <span class="product-tag top">Premium</span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Premium</span>
+                        <h3>Pizza do Portal</h3>
+                        <p class="desc">Filé mignon, gorgonzola, cebola caramelizada e tomate seco.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (67)</div>
+                        <div class="product-price"><span class="new-price">R$ 89,90</span></div>
+                        <button class="btn-add" data-name="Pizza do Portal" data-price="89.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="premium">
+                    <div class="product-image"><span>🍕</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Premium</span>
+                        <h3>Pizza Upside Down</h3>
+                        <p class="desc">Camarão, catupiry, alho poró e azeite trufado.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (54)</div>
+                        <div class="product-price"><span class="new-price">R$ 99,90</span></div>
+                        <button class="btn-add" data-name="Pizza Upside Down" data-price="99.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="premium">
+                    <div class="product-image"><span>🍕</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Premium</span>
+                        <h3>Pizza Hellfire Club</h3>
+                        <p class="desc">Picanha, cheddar inglês, cebola crispy e molho especial.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (98)</div>
+                        <div class="product-price"><span class="new-price">R$ 94,90</span></div>
+                        <button class="btn-add" data-name="Pizza Hellfire Club" data-price="94.90" data-emoji="🍕">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="doces">
+                    <div class="product-image"><span>🍫</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Doce</span>
+                        <h3>Pizza de Chocolate</h3>
+                        <p class="desc">Chocolate ao leite derretido, morangos e granulado.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (178)</div>
+                        <div class="product-price"><span class="new-price">R$ 42,90</span></div>
+                        <button class="btn-add" data-name="Pizza de Chocolate" data-price="42.90" data-emoji="🍫">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="doces">
+                    <div class="product-image"><span>🍫</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Doce</span>
+                        <h3>Pizza de Nutella</h3>
+                        <p class="desc">Nutella, morangos frescos, banana e açúcar de confeiteiro.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (156)</div>
+                        <div class="product-price"><span class="new-price">R$ 49,90</span></div>
+                        <button class="btn-add" data-name="Pizza de Nutella" data-price="49.90" data-emoji="🍫">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="doces">
+                    <div class="product-image"><span>🍫</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Doce</span>
+                        <h3>Pizza Romeu e Julieta</h3>
+                        <p class="desc">Goiabada cremosa, queijo minas e canela.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (129)</div>
+                        <div class="product-price"><span class="new-price">R$ 39,90</span></div>
+                        <button class="btn-add" data-name="Pizza Romeu e Julieta" data-price="39.90" data-emoji="🍫">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="bebidas">
+                    <div class="product-image"><span>🥤</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Bebida</span>
+                        <h3>Coca-Cola 2L</h3>
+                        <p class="desc">Refrigerante gelado para acompanhar sua pizza.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (312)</div>
+                        <div class="product-price"><span class="new-price">R$ 14,90</span></div>
+                        <button class="btn-add" data-name="Coca-Cola 2L" data-price="14.90" data-emoji="🥤">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="bebidas">
+                    <div class="product-image"><span>🥤</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Bebida</span>
+                        <h3>Guaraná Antarctica 2L</h3>
+                        <p class="desc">O sabor brasileiro que combina com tudo.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (178)</div>
+                        <div class="product-price"><span class="new-price">R$ 12,90</span></div>
+                        <button class="btn-add" data-name="Guaraná Antarctica 2L" data-price="12.90" data-emoji="🥤">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="bebidas">
+                    <div class="product-image"><span>🍺</span></div>
+                    <div class="product-info">
+                        <span class="product-category">Bebida</span>
+                        <h3>Cerveja Heineken 600ml</h3>
+                        <p class="desc">Gelada, perfeita para dividir com quem você ama.</p>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (89)</div>
+                        <div class="product-price"><span class="new-price">R$ 18,90</span></div>
+                        <button class="btn-add" data-name="Cerveja Heineken 600ml" data-price="18.90" data-emoji="🍺">Adicionar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="about" id="sobre">
+        <div class="container about-content">
+            <div class="about-image"><span>🍕</span></div>
+            <div class="about-text">
+                <span class="section-tag">Nossa História</span>
+                <h2>Nascemos no lado sombrio da cidade</h2>
+                <p>Desde 2010, a Pizzaria Rafaela traz o sabor autêntico do Upside Down para o mundo real. Nossas receitas atravessaram portais, nossos cozinheiros enfrentaram Demogorgons e nossa missão é uma só: alimentar a cidade com as pizzas mais deliciosas (e assustadoramente boas) que você já provou.</p>
+                <ul class="about-list">
+                    <li>👾 Receitas originais do Upside Down</li>
+                    <li>🔥 Forno a lenha interdimensional</li>
+                    <li>🚀 Entrega em até 30 minutos</li>
+                    <li>🧀 Ingredientes de altíssima qualidade</li>
+                </ul>
+                <a href="#contato" class="btn btn-primary">Fale Conosco</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container features-grid">
+            <div class="feature">
+                <span class="feature-icon">🚚</span>
+                <h4>Entrega Rápida</h4>
+                <p>Através do portal em até 30 min</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">💳</span>
+                <h4>Pague como Quiser</h4>
+                <p>Pix, cartão ou dinheiro</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔒</span>
+                <h4>Site Seguro</h4>
+                <p>Protegido pelo Eleven</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">👾</span>
+                <h4>Sabor Único</h4>
+                <p>Direto do Upside Down</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contato">
+        <div class="container footer-grid">
+            <div>
+                <a href="#" class="logo">
+                    <span class="logo-icon">🍕</span>
+                    <span class="logo-text">Pizzaria <span>Rafaela</span></span>
+                </a>
+                <p class="footer-desc">Sabor autêntico do Upside Down desde 2010. Cuidando da sua fome com muito terror e sabor.</p>
+                <div class="social">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">💬</a>
+                </div>
+            </div>
+            <div>
+                <h4>Institucional</h4>
+                <ul>
+                    <li><a href="#sobre">Sobre nós</a></li>
+                    <li><a href="#diferenciais">Diferenciais</a></li>
+                    <li><a href="#cardapio">Cardápio</a></li>
+                    <li><a href="#">Trabalhe conosco</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Ajuda</h4>
+                <ul>
+                    <li><a href="#">Central de ajuda</a></li>
+                    <li><a href="#">Trocas e devoluções</a></li>
+                    <li><a href="#">Formas de pagamento</a></li>
+                    <li><a href="#">Rastrear pedido</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contato</h4>
+                <ul class="contact-info">
+                    <li>📍 Rua Hawkins, 13 - Centro</li>
+                    <li>📞 (81) 9 8971-7252</li>
+                    <li>✉️ contato@pizzariarafaela.com</li>
+                    <li>🕐 Ter a Dom: 18h às 23h30</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Pizzaria Rafaela - Upside Down Edition. Feito com 🧡 e 👾 para os corajosos.</p>
+        </div>
+    </footer>
+
+    <!-- Modal do Carrinho -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h3>🛒 Seu Pedido</h3>
+                <button class="cart-close" onclick="closeCart()">✕</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-empty">
+                    <span>👾</span>
+                    Seu carrinho está vazio!<br>
+                    Adicione algo do cardápio.
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-field">
+                    <label for="customerName">Seu nome</label>
+                    <input type="text" id="customerName" placeholder="Como podemos te chamar?">
+                </div>
+                <div class="cart-field">
+                    <label for="customerAddress">Endereço de entrega</label>
+                    <textarea id="customerAddress" rows="2" placeholder="Rua, número, bairro, complemento..."></textarea>
+                </div>
+                <div class="cart-field">
+                    <label for="paymentMethod">Forma de pagamento</label>
+                    <select id="paymentMethod">
+                        <option value="Pix">Pix</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                        <option value="Cartão de Débito">Cartão de Débito</option>
+                    </select>
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <strong id="cartTotal">R$ 0,00</strong>
+                </div>
+                <button class="btn-checkout" id="btnCheckout" onclick="finalizarPedido()" disabled>
+                    📱 Enviar Pedido via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">✅ Item adicionado!</div>
+
+    <!-- WhatsApp Flutuante -->
+    <button class="whats-float" onclick="openWhatsDirect()" title="Fale conosco no WhatsApp">💬</button>
+
+    <script>
+        /* =========================================================
+           CONFIGURAÇÕES
+        ========================================================= */
+        const WHATSAPP_NUMBER = '5581989717252'; // Número do fornecedor: 81 9 8971-7252
+
+        /* =========================================================
+           ESTADO DO CARRINHO
+        ========================================================= */
+        let cart = [];
+        try {
+            const saved = localStorage.getItem('pizzaria_rafaela_cart');
+            if (saved) cart = JSON.parse(saved);
+        } catch (e) { cart = []; }
+
+        /* =========================================================
+           FUNÇÕES AUXILIARES
+        ========================================================= */
+        function formatBRL(value) {
+            return 'R$ ' + value.toFixed(2).replace('.', ',');
+        }
+
+        function saveCart() {
+            try {
+                localStorage.setItem('pizzaria_rafaela_cart', JSON.stringify(cart));
+            } catch (e) {}
+        }
+
+        function showToast(message, emoji = '✅') {
+            const toast = document.getElementById('toast');
+            toast.textContent = `${emoji} ${message}`;
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        /* =========================================================
+           ADICIONAR ITEM AO CARRINHO
+        ========================================================= */
+        function addTo
